@@ -76,7 +76,7 @@ export class SiteController {
         let userObj = <SubscribingUser>{};
 
         if (req.body.email !== null) {
-            userObj = jQuery.parseJSON(`
+            userObj = JSON.parse(`
                 {
                     "firstName": "${req.body.first_name}",
                     "lastname": "${req.body.last_name}",

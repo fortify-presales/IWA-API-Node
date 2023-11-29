@@ -33,13 +33,13 @@ const appName: string = config.get('App.name') || "IWA-Express";
 const appPort: number = config.get('App.port') || 8000;
 const apiUrl: string = config.get('App.apiConfig.url') || "http://localhost:3000/api-docs/";
 
-/*app.listen(appPort, () => {
+app.listen(appPort, () => {
     Logger.debug(`Running in directory: ${global.__basedir}`);
     Logger.info(`${appName} API is online at ${apiUrl}`);
-});*/
+});
 
-http.createServer(app).listen(appPort, () => {
+/*http.createServer(app).listen(appPort, () => {
     Logger.debug(`Running in directory: ${global.__basedir}`);
     Logger.info(`${appName} is online at ${apiUrl}`);
-});
+});*/
 

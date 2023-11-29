@@ -31,16 +31,16 @@ export abstract class EncryptUtils {
         var cipher = crypto.createCipher(this.algorithm, this.encryptionKey);
         var mystr = cipher.update(password, 'utf8', 'hex');
         mystr += cipher.final('hex');
-        process.stdout.write("Encrypted password:" + mystr);
+        //process.stdout.write("Encrypted password:" + mystr);
         return mystr;
     }
 
     public static decryptPassword(hashPassword: String): String {
-        process.stdout.write("Decrypting password: " + hashPassword);
+        //process.stdout.write("Decrypting password: " + hashPassword);
         var cipher = crypto.createDecipher(this.algorithm, this.encryptionKey);
         var mystr = cipher.update(hashPassword, 'hex', 'utf8');
         mystr += cipher.final('utf8');
-        process.stdout.write("Decrypted password:" + mystr);
+        //process.stdout.write("Decrypted password:" + mystr);
         return mystr;
     }
 
@@ -49,7 +49,7 @@ export abstract class EncryptUtils {
         var cipher = crypto.createDecipher(this.algorithm, this.encryptionKey);
         var mystr = cipher.update(hashPassword, 'hex', 'utf8');
         mystr += cipher.final('utf8');
-        process.stdout.write("Comparing passwords: " + mystr + " = " + password);
+        //process.stdout.write("Comparing passwords: " + mystr + " = " + password);
         return (password == mystr);
     }
 
