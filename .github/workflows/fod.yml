@@ -107,6 +107,7 @@ jobs:
           PACKAGE_EXTRA_OPTS: "-bt none"
           SOURCE_DIR: ${{env.DEFAULT_SOURCE_DIR}}
           DO_POLICY_CHECK: false  # we will do this later afer SCA and DAST scan
+          DO_EXPORT: true
 
   FoD-OSS-Scan:
     runs-on: ubuntu-latest

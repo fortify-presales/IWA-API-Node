@@ -27,7 +27,7 @@ export abstract class ImageUtils {
                 const outputFile = file.replace(/\.[^/.]+$/, `.${type}`);
                 await sharp(file)
                         .resize(width, height)
-                        .toFormat(type)
+                        .toFormat(type as keyof sharp.FormatEnum)
                         .toFile(outputFile);
                 return { sendStatus: (status: number) => status };
         }
