@@ -108,6 +108,11 @@ jobs:
           SOURCE_DIR: ${{env.DEFAULT_SOURCE_DIR}}
           DO_POLICY_CHECK: false  # we will do this later afer SCA and DAST scan
           DO_EXPORT: true
+          # Upload the SARIF file generated in the previous step
+      - name: Upload SARIF results file
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ./gh-fortify-sast.sarif
 
   FoD-OSS-Scan:
     runs-on: ubuntu-latest
