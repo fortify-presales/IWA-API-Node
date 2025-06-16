@@ -21,6 +21,9 @@ import {Request, Response, Router} from 'express';
 
 import {SiteController} from "../controllers/site.controller";
 import {AuthorizationHandler} from "../middleware/authorization.handler";
+import { exec } from 'child_process';
+import * as fs from 'fs';
+import { ImageUtils } from '../utils/image.utils';
 
 const site_controller: SiteController = new SiteController();
 
@@ -115,21 +118,57 @@ siteRoutes.post('/api/v1/site/backup-newsletter-db', [AuthorizationHandler.permi
     site_controller.backup_newsletter_db(req, res);
 });
 
-/*siteRoutes.post('/api/site/upload-image', function(request, response) {
-    fs.writeFileSync(`/tmp/upload/${request.body.name}`);
+siteRoutes.post('/api/site/upload-image', function(request, response) {
+
+    /*
+        #swagger.tags = ['Site']
+        #swagger.summary = "Upload an image"
+        #swagger.description = "Upload an image to the server"
+        #swagger.operationId = "uploadImage"
+        #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: {
+                        type: 'object',
+                        properties: {
+                            name: { type: 'string', description: 'The name of the image file' },
+                            data: { type: 'string', description: 'Base64 encoded image data' }
+                        },
+                        required: ['name', 'data']
+                    }
+                }
+            }
+        }
+        #swagger.responses[200] = {
+            description: "Success",
+            schema: { $ref: '#/components/schemas/success' }
+        }
+        #swagger.responses[400] = {
+            description: "Bad Request",
+            schema: { $ref: '#/components/schemas/failure' }
+        }
+        #swagger.responses[500] = {
+            description: "Internal Server Error",
+            schema: { $ref: '#/components/schemas/failure' }
+        }
+    */
+   
+    fs.writeFileSync(`/tmp/upload/${request.body.name}`, request.body.data || '');
 
     // convert the image to correct size and format
-    convert({
+    ImageUtils.convert({
         file: `/tmp/upload/${request.body.name}`,
         width: 600,
         height: 400,
         type: 'jpeg'
-    }).then(response => {
+    }).then((response: { sendStatus: (arg0: number) => any; }) => {
         // Command injection example
         exec('rm /tmp/upload/${request.body.name}');
         return response.sendStatus(200);
-    }).catch(error => {
+    }).catch((error: any) => {
         return response.sendStatus(500);
     })
 
-});*/
+});
+
